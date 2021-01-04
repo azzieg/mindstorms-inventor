@@ -49,7 +49,7 @@ libraries like [BrickNil](http://pypi.org/project/bricknil) or
 [pylgbst](http://github.com/undera/pylgbst). While remote control is also possible with the new
 Mindstorms hub (called *streaming* mode), reading the sensors and driving motors on the device is
 better from latency perspective, so we will focus on it first and look for advanced remote control
-options later.
+options next.
 
 ## Getting started
 
@@ -70,15 +70,15 @@ API is pretty primitive, but internally, while somewhat messy, it is pretty rich
 ### Interaction between the app and the hub
 
 When the Mindstorms Inventor app is used, it allows the user to create and upload programs, which
-are then executed on the hub. Even when code blocks are used, they are internally translated into
-Python which is then executed on the hub. The hub sends telemetry back to the app, so that execution
-can be monitored.
+are then executed on the hub. Even when blocks are used, they are internally translated into Python
+which is then executed on the hub. While the app the the hub are connected, the hub sends telemetry
+back to the app, so that execution can be monitored.
 
 Some functionality requires a remote control (called *streaming*) mode instead, which allows the app
 to remotely control the hub. For example, when a keyboard or a game controller event is used, the
 app will not send the code which responds to the event to the hub, but will directly steer lights or
-motors. In full streaming mode, all code will be running in the app and can be changed dynamically
-in the app while being executed.
+motors using the cable or Bluetooth connection. In full streaming mode, all code will be running in
+the app and can be changed dynamically in the app while being executed.
 
 Some functionality is provided by the app. For example some sounds or music are played by the app
 itself. If the hub is connected to the app, Python code will invoke functionality in the app via
@@ -88,8 +88,28 @@ a Remote Procedure Call (RPC) protocol.
 
 Micropython is single-threaded, but has a concept of coroutines which enable cooperative
 multi-tasking. Unfortunately, the standard uasyncio library is not included in the firmware, but one
-can create and use coroutines using the async/await syntax.
+can create and use coroutines using the `async`/`await` syntax.
 
 Mindstorms hub provides its own event loop that is started when the hub is started. This allows
 scheduling coroutines that can yield when they await a certain condition and have other code
 executed in the meantime.
+
+### How programs are executed
+
+After the hub is started and the execution environment (runtime) is initialized, the main event loop
+is started. Initially it runs two main internal programs: the "ui" program responsible for selection
+and execution of user programs from the hub and the RPC handler responsible for remote control from
+the Mindstorms Inventor app.
+
+The hub distinguishes Word Blocks and Python user programs, even though both result in Python code
+in the end. They are executed when the program is selected on the hub using the buttons or where an
+instruction to execute a program is sent from the app. This runs user code until stopped or until
+an error occurs.
+
+Word Block programs are provided with setup environment, so they can construct a "virtual machine"
+that builds on top of the event loop, allows convenient registration of event handlers, integrates
+with the RPC system and provides mid-level program building blocks.
+
+Python programs are executed directly. A simple synchronous API is provided through the `MSHub` and
+other classes, but it is far from obvious how to react to events or execute parts of program in
+parallel.
