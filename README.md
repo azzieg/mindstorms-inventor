@@ -159,11 +159,55 @@ setup(RPC(), system.system, sys.exit).start()
 
 The `setup` function creates a virtual machine (VM) and registers program components. In our
 example the `main` function will be executed on start. The RPC class fakes the RPC part needed for
-execution reporting, we'll see later how to set it up properly. The last line is the magic that
-invokes the setup, linking the VM to the system environment. After setting up the VM up, we
-start it, so that the event loop can start executing our program.
+execution reporting, we'll see later how to set it up properly.
+
+The last line is the magic that invokes the setup, linking the VM to the system environment. After
+setting up the VM up, we start it, so that the event loop can start executing our program. We need
+to do this manually, since such setup won't be invoked automatically for Python programs.
 
 The actual program lives in the asynchronous `main` function, so we can invoke and await coroutines
 like the `write_async` one. Since we're given a handle to the VM, we can stop it after the
 `write_async` operation completes, effectively completing our user program and returning control to
 the built-in "ui" program.
+
+### Full-blown "Hello world"
+
+So let's make this example a bit more interesting by doing two things (light and sound) in parallel
+and allowing asynchronous cancelation:
+
+```python
+import hub
+import runtime
+import sys
+import system
+
+async def run(vm, stack):
+    vm.broadcast("run")
+
+async def display(vm, stack):
+    await vm.system.display.write_async("Hello world")
+
+async def sound(vm, stack):
+    await vm.system.sound.play_async("/extra_files/Hello")
+    await vm.system.sound.play_async("/extra_files/Celebrate")
+
+async def cancel(vm, stack):
+    vm.stop_stacks(except_stack=stack)
+    hub.display.clear()
+    hub.sound.beep(0, 0)
+
+def setup(rpc, system, stop):
+    vm = runtime.VirtualMachine(rpc, system, stop, "HelloWorld")
+    vm.register_on_start("run", run)
+    vm.register_on_broadcast("display", display, "run")
+    vm.register_on_broadcast("sound", sound, "run")
+    vm.register_on_button("left_button", cancel, "left", "pressed")
+    vm.register_on_button("right_button", run, "right", "pressed")
+    return vm
+
+class RPC:
+    def emit(self, op, id):
+        pass
+
+setup(RPC(), system.system, sys.exit).start()
+```
