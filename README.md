@@ -148,8 +148,8 @@ async def main(vm, stack):
     vm.stop()
 
 def setup(rpc, system, stop):
-    vm = runtime.VirtualMachine(rpc, system, stop, "HelloWorld")
-    vm.register_on_start("main", main)
+    vm = runtime.VirtualMachine(rpc, system, stop, "hello_world")
+    vm.register_on_start("main_on_start", main)
     return vm
 
 class RPC:
@@ -199,12 +199,12 @@ async def cancel(vm, stack):
     hub.sound.beep(0, 0)
 
 def setup(rpc, system, stop):
-    vm = runtime.VirtualMachine(rpc, system, stop, "HelloWorld")
-    vm.register_on_start("run", run)
-    vm.register_on_broadcast("display", display, "run")
-    vm.register_on_broadcast("sound", sound, "run")
-    vm.register_on_button("left_button", cancel, "left", "pressed")
-    vm.register_on_button("right_button", run, "right", "pressed")
+    vm = runtime.VirtualMachine(rpc, system, stop, "hello_world")
+    vm.register_on_start("run_on_start", run)
+    vm.register_on_broadcast("display_on_run", display, "run")
+    vm.register_on_broadcast("sound_on_run", sound, "run")
+    vm.register_on_button("cancel_on_left_button", cancel, "left", "pressed")
+    vm.register_on_button("run_on_right_button", run, "right", "pressed")
     return vm
 
 class RPC:
