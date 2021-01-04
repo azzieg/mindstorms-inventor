@@ -17,8 +17,8 @@ Mindstorms Inventor mobile app
 ([Windows](http://www.microsoft.com/en-us/p/lego-mindstorms-robot-inventor/9mtq0n7w1d6x) or
 [MacOS](http://apps.apple.com/app/lego-mindstorms-inventor/id1515448947)), this website is for you.
 We will exploit the fact that the new Mindstorms brick runs [Micropython](http://micropython.org)
-natively. You'll quickly be able to do more with Python than with [Scratch](http://scratch.mit.edu)
-block programs, not less.
+natively. You'll quickly be able to do more with Python than with Word Blocks (in fact
+[Scratch](http://scratch.mit.edu)) programs, not less.
 
 This site is not affiliated with the LEGO Group. Any information or code presented here might brick
 (no pun intended) your Mindstorms hub. So use it at your own risk, but feel free to share your
@@ -55,9 +55,10 @@ options later.
 
 ### Background
 
-Mindstorms Robot Inventor hub is running a Micropython "OS". It includes drivers to control sensors
-and motors, a small Python runtime and small set of libraries for common operations that range from
-basic file I/O and communication with hub compoents to JSON serialization or compression.
+Mindstorms Robot Inventor hub is running a Micropython "operating system". It includes drivers to
+control sensors and motors, a small Python runtime and small set of libraries for common operations
+that range from basic file I/O and communication with hub compoents to JSON serialization or
+compression.
 
 Micropython can be regarded as a limited and customized version of Python, while Micropython version
 run on the hub can be regarded as a limited and customized version of universal Micropython.
@@ -82,3 +83,13 @@ in the app while being executed.
 Some functionality is provided by the app. For example some sounds or music are played by the app
 itself. If the hub is connected to the app, Python code will invoke functionality in the app via
 a Remote Procedure Call (RPC) protocol.
+
+### Concurrency model
+
+Micropython is single-threaded, but has a concept of coroutines which enable cooperative
+multi-tasking. Unfortunately, the standard uasyncio library is not included in the firmware, but one
+can create and use coroutines using the async/await syntax.
+
+Mindstorms hub provides its own event loop that is started when the hub is started. This allows
+scheduling coroutines that can yield when they await a certain condition and have other code
+executed in the meantime.
