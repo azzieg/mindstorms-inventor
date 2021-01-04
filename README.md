@@ -107,8 +107,8 @@ instruction to execute a program is sent from the app. This runs user code until
 an error occurs.
 
 Word Block programs are provided with setup environment, so they can construct a "virtual machine"
-that builds on top of the event loop, allows convenient registration of event handlers, integrates
-with the RPC system and provides mid-level program building blocks.
+(VM) that builds on top of the event loop, allows convenient registration of event handlers,
+integrates with the RPC system and provides mid-level program building blocks.
 
 Python programs are executed directly. A simple synchronous API is provided through the `MSHub` and
 other classes, but it is far from obvious how to react to events or execute parts of program in
@@ -127,3 +127,43 @@ import mindstorms
 hub = mindstorms.MSHub()
 hub.light_matrix.write("Hello world")
 ```
+
+It is cool, but not really extensible. What if we wanted to play a sound on the hub (there does not
+even seem to be a documented API for this) while displaying the message and stop any of this when a
+button is pressed? It is possible using blocks, so must be possible using Python.
+
+### Asynchronous "Hello world"
+
+Let's mimic the code generated from Word Blocks (we'll discuss later how to get it) doing the same:
+
+```python
+import runtime
+import sys
+import system
+
+async def main(vm, stack):
+    await vm.system.display.write_async("Hello world")
+    vm.stop()
+
+def setup(rpc, system, stop):
+    vm = runtime.VirtualMachine(rpc, system, stop, "HelloWorld")
+    vm.register_on_start("main", main)
+    return vm
+
+class RPC:
+    def emit(self, op, id):
+        pass
+
+setup(RPC(), system.system, sys.exit).start()
+```
+
+The `setup` function creates a virtual machine (VM) and registers program components. In our
+example the `main` function will be executed on start. The RPC class fakes the RPC part needed for
+execution reporting, we'll see later how to set it up properly. The last line is the magic that
+invokes the setup, linking the VM to the system environment. After setting up the VM up, we
+start it, so that the event loop can start executing our program.
+
+The actual program lives in the asynchronous `main` function, so we can invoke and await coroutines
+like the `write_async` one. Since we're given a handle to the VM, we can stop it after the
+`write_async` operation completes, effectively completing our user program and returning control to
+the built-in "ui" program.
