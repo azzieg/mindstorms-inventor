@@ -67,6 +67,16 @@ connectivity, for example. Furthermore, LEGO implemented a bunch of libraries, w
 to support its robotic platform and software. The reasonably documented and officially offered
 API is pretty primitive, but internally, while somewhat messy, it is pretty rich.
 
+### Concurrency model
+
+Micropython is single-threaded, but has a concept of coroutines which enable cooperative
+multi-tasking. Unfortunately, the standard uasyncio library is not included in the firmware, but one
+can create and use coroutines using the `async`/`await` syntax.
+
+Mindstorms hub provides its own event loop that is started when the hub is started. This allows
+scheduling coroutines that can yield when they await a certain condition and have other code
+executed in the meantime.
+
 ### Interaction between the app and the hub
 
 When the Mindstorms Inventor app is used, it allows the user to create and upload programs, which
@@ -84,22 +94,12 @@ Some functionality is provided by the app. For example some sounds or music are 
 itself. If the hub is connected to the app, Python code will invoke functionality in the app via
 a Remote Procedure Call (RPC) protocol.
 
-### Concurrency model
-
-Micropython is single-threaded, but has a concept of coroutines which enable cooperative
-multi-tasking. Unfortunately, the standard uasyncio library is not included in the firmware, but one
-can create and use coroutines using the `async`/`await` syntax.
-
-Mindstorms hub provides its own event loop that is started when the hub is started. This allows
-scheduling coroutines that can yield when they await a certain condition and have other code
-executed in the meantime.
-
 ### How programs are executed
 
 After the hub is started and the execution environment (runtime) is initialized, the main event loop
 is started. Initially it runs two main internal programs: the "ui" program responsible for selection
 and execution of user programs from the hub and the RPC handler responsible for remote control from
-the Mindstorms Inventor app.
+the Mindstorms Inventor app and the telemetry.
 
 The hub distinguishes Word Blocks and Python user programs, even though both result in Python code
 in the end. They are executed when the program is selected on the hub using the buttons or where an
@@ -113,3 +113,17 @@ with the RPC system and provides mid-level program building blocks.
 Python programs are executed directly. A simple synchronous API is provided through the `MSHub` and
 other classes, but it is far from obvious how to react to events or execute parts of program in
 parallel.
+
+## My first program
+
+### Synchronous "Hello world"
+
+Using the official documentation we can produce the following simple program that prints "Hello
+world" on the light matrix:
+
+```python
+import mindstorms
+
+hub = mindstorms.MSHub()
+hub.light_matrix.write("Hello world")
+```
