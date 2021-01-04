@@ -15,8 +15,8 @@ Mindstorms Inventor mobile app
 ([Windows](http://www.microsoft.com/en-us/p/lego-mindstorms-robot-inventor/9mtq0n7w1d6x) or
 [MacOS](http://apps.apple.com/app/lego-mindstorms-inventor/id1515448947)), this website is for you.
 We will exploit the fact that the new Mindstorms brick runs [Micropython](http://micropython.org)
-natively. You'll quickly be able to do more with Python than with [Scratch](scratch.mit.edu) block
-programs, not less.
+natively. You'll quickly be able to do more with Python than with [Scratch](http://scratch.mit.edu)
+block programs, not less.
 
 This site is not affiliated with the LEGO Group. Any information or code presented here might brick
 (no pun intended) your Mindstorms hub. So use it at your own risk, but feel free to share your
@@ -25,7 +25,7 @@ experience and contribute.
 ## What this repository is not about
 
 We do not intend to cover the [Mindstorms EV3 (31313)](http://www.lego.com/product/31313) set. Since
-[Micropython firmware from Pybricks](https://pybricks.github.io/ev3-micropython) is avalable (and
+[Micropython firmware from Pybricks](http://pybricks.github.io/ev3-micropython) is avalable (and
 even officially supported by LEGO) for it, some general information and techniques presented here
 might also be applicable to EV3 users using that firmware. Despite this, there are big architectural
 differences between EV3 and Robot Inventor (in fact, the [EV3 Intelligent
@@ -38,5 +38,12 @@ Powered Up hubs like the [Move Hub](http://www.lego.com/product/88006) (part of 
 Toolbox (17101)](http://www.lego.com/product/17101) set), the [City
 Hub](http://www.lego.com/product/88009) or the [Technic Hub](http://www.lego.com/product/88012)
 (present in many sets with different motor configurations),
-those are generally intended for remote control by a smart device rather than running user code. And
-so are much less powerful and depend on flashing custom firmware, which limits compatibility.
+those are generally intended for remote control by a smart device rather than running user code and
+so are much less powerful. Running user code on those also requires flashing custom firmware, which
+comes with its pros and cons.
+
+For all Powered Up hubs remote control via BluetoothLE is possible. This led to creation of libraries
+like [BrickNil](http://pypi.org/project/bricknil) or [pylgbst](http://github.com/undera/pylgbst).
+While remote control is also possible with the new Mindstorms hub (called streaming mode), reading
+the sensors and driving motors on the device is better from latency perspective, so we will focus on
+it first and look for advanced remote control options later.
