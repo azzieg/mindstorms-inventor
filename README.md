@@ -129,12 +129,14 @@ hub.light_matrix.write("Hello world")
 ```
 
 It is cool, but not really extensible. What if we wanted to play a sound on the hub (there does not
-even seem to be a documented API for this) while displaying the message and stop any of this when a
-button is pressed? It is possible using blocks, so must be possible using Python.
+even seem to be a documented API for this!) while displaying the message? And what if we wanted to
+stop any of this when a button is pressed? It is possible using blocks, so must be possible using
+Python.
 
 ### Asynchronous "Hello world"
 
-Let's mimic the code generated from Word Blocks (we'll discuss later how to get it) doing the same:
+Let's mimic the code generated from Word Blocks (we'll discuss later how to get it) doing the same
+as in the example above:
 
 ```python
 import runtime
@@ -168,12 +170,12 @@ to do this manually, since such setup won't be invoked automatically for Python 
 The actual program lives in the asynchronous `main` function, so we can invoke and await coroutines
 like the `write_async` one. Since we're given a handle to the VM, we can stop it after the
 `write_async` operation completes, effectively completing our user program and returning control to
-the built-in "ui" program.
+the system "ui" program.
 
-### Full-blown "Hello world"
+### "Hello world" with light and sound
 
-So let's make this example a bit more interesting by doing two things (light and sound) in parallel
-and allowing asynchronous cancelation:
+So let's make this example a bit more interesting by doing two things (light and sound) in parallel,
+and by implementing asynchronous cancelation:
 
 ```python
 import hub
@@ -211,3 +213,9 @@ class RPC:
 
 setup(RPC(), system.system, sys.exit).start()
 ```
+
+We use message broadcast for convenience. When the program is started, or when the right button is
+pressed, we trigger `display` and `sound` coroutines, which display a message on the light matrix
+and play some sounds respectively, simultaneously. When the left button is pressed, we stop all
+other coroutines (so that we don't play the second sound after the first one is interrupted, for
+example) and interrupt any ongoing display and sound by clearing the display and playing no sound.
