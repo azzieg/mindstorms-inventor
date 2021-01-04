@@ -48,8 +48,8 @@ For all Powered Up hubs remote control via BluetoothLE is possible. This led to 
 libraries like [BrickNil](http://pypi.org/project/bricknil) or
 [pylgbst](http://github.com/undera/pylgbst). While remote control is also possible with the new
 Mindstorms hub (called *streaming* mode), reading the sensors and driving motors on the device is
-better from latency perspective, so we will focus on it first and look for advanced remote control
-options next.
+better from latency perspective, we will primarily focus on running code on the hub, using remote
+control only when it is truly needed.
 
 ## Getting started
 
