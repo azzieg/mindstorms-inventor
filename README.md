@@ -81,7 +81,7 @@ executed in the meantime.
 
 When the Mindstorms Inventor app is used, it allows the user to create and upload programs, which
 are then executed on the hub. Even when blocks are used, they are internally translated into Python
-which is then executed on the hub. While the app the the hub are connected, the hub sends telemetry
+which is then executed on the hub. While the app and the hub are connected, the hub sends telemetry
 back to the app, so that execution can be monitored.
 
 Some functionality requires a remote control (called *streaming*) mode instead, which allows the app
