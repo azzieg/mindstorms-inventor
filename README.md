@@ -57,7 +57,7 @@ control only when it is truly needed.
 
 Mindstorms Robot Inventor hub is running a Micropython "operating system". It includes drivers to
 control sensors and motors, a small Python runtime and small set of libraries for common operations
-that range from basic file I/O and communication with hub compoents to JSON serialization or
+that range from basic file I/O and communication with hub components to JSON serialization or
 compression.
 
 Micropython can be regarded as a limited and customized version of Python, while Micropython version
