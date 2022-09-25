@@ -1,3 +1,6 @@
+import math
+from util.scratch import clamp
+
 # Sound changevolumeby
 new_volume = math.floor(
     clamp(vm.system.sound.get_volume() + -10, 0, 100) # percent, min 0, max 100
