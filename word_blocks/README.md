@@ -1,5 +1,12 @@
 # Word blocks Python reference
+
+In the following snippets, the `vm` variable is a reference to a VirtualMachine
+instance and the `await` keyword can only be used in async functions. Please
+read the [introduction](/README.md) to learn about the basic setup necessary to
+run such code on a LEGO hub.
+
 ## Motors
+
 | Word block | Generated Python code (formatted and annotated) |
 | -- | -- |
 | <img src="/word_blocks/01_motors/01a_motor_run_for_rotations.png" width="286"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/01_motors/01a_motor_run_for_rotations.py#L1-L11 |
@@ -10,7 +17,9 @@
 | <img src="/word_blocks/01_motors/05_motor_set_speed.png" width="206"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/01_motors/05_motor_set_speed.py#L1-L2 |
 | <img src="/word_blocks/01_motors/06_motor_get_position.png" width="143"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/01_motors/06_motor_get_position.py#L1-L5 |
 | <img src="/word_blocks/01_motors/07_motor_get_speed.png" width="133"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/01_motors/07_motor_get_speed.py#L1-L3 |
+
 ## Movement
+
 | Word block | Generated Python code (formatted and annotated) |
 | -- | -- |
 | <img src="/word_blocks/02_movement/01a_motors_move_distance.png" width="225"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/02_movement/01a_motors_move_distance.py#L1-L16 |
@@ -22,7 +31,9 @@
 | <img src="/word_blocks/02_movement/05_motors_set_speed.png" width="223"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/02_movement/05_motors_set_speed.py#L1-L2 |
 | <img src="/word_blocks/02_movement/06_motors_set_ports.png" width="236"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/02_movement/06_motors_set_ports.py#L1-L2 |
 | <img src="/word_blocks/02_movement/07_motors_calibrate_distance.png" width="292"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/02_movement/07_motors_calibrate_distance.py#L1-L2 |
+
 ## Light
+
 | Word block | Generated Python code (formatted and annotated) |
 | -- | -- |
 | <img src="/word_blocks/03_light/01_matrix_start_animation.png" width="220"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/03_light/01_matrix_start_animation.py#L1-L18 |
@@ -37,7 +48,19 @@
 | <img src="/word_blocks/03_light/10_matrix_set_orientation.png" width="212"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/03_light/10_matrix_set_orientation.py#L1-L5 |
 | <img src="/word_blocks/03_light/11_button_set_color.png" width="227"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/03_light/11_button_set_color.py#L1-L9 |
 | <img src="/word_blocks/03_light/12_ultrasonic_set_lights.png" width="184"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/03_light/12_ultrasonic_set_lights.py#L1-L14 |
+
 ## Sound
+
 | Word block | Generated Python code (formatted and annotated) |
 | -- | -- |
-| <img src="/word_blocks/04_sound/01_sound_play_sound.png" width="190"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/01_sound_play_sound.py#L1-L6 |
+| <img src="/word_blocks/04_sound/01_sound_play_sound.png" width="190"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/01_sound_play_sound.py#L1-L10 |
+| <img src="/word_blocks/04_sound/02_sound_start_sound.png" width="137"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/02_sound_start_sound.py#L1-L10 |
+| <img src="/word_blocks/04_sound/03_sound_play_beep.png" width="239"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/03_sound_play_beep.py#L1-L5 |
+| <img src="/word_blocks/04_sound/04_sound_start_beep.png" width="178"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/04_sound_start_beep.py#L1-L6 |
+| <img src="/word_blocks/04_sound/05_sound_stop.png" width="91"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/05_sound_stop.py#L1-L3 |
+| <img src="/word_blocks/04_sound/06_sound_change_effect.png" width="193"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/06_sound_change_effect.py#L1-L8 |
+| <img src="/word_blocks/04_sound/07_sound_set_effect.png" width="225"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/07_sound_set_effect.py#L1-L4 |
+| <img src="/word_blocks/04_sound/08_sound_clear_effects.png" width="112"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/08_sound_clear_effects.py#L1-L3 |
+| <img src="/word_blocks/04_sound/09_sound_change_volume.png" width="143"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/09_sound_change_volume.py#L1-L6 |
+| <img src="/word_blocks/04_sound/10_sound_set_volume.png" width="131"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/10_sound_set_volume.py#L1-L4 |
+| <img src="/word_blocks/04_sound/11_sound_get_volume.png" width="56"> | https://github.com/azzieg/mindstorms-inventor/blob/0fbd07f3223574722c75e32ff520d79cf71b6a51/word_blocks/04_sound/11_sound_get_volume.py#L1-L3 |
