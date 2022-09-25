@@ -7,5 +7,5 @@ await vm.system.display.show_async(
         convert_image(
             "9909999099000009000909990", # 0 is off, 9 is full brightness
             vm.store.display_brightness())),
-     clear=True,
+     clear=True, # whether to clear or leave the image in the end
      delay=2000) # milliseconds, 2 seconds = 2000 milliseconds

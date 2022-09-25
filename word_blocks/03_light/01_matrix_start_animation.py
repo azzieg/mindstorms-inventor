@@ -11,8 +11,8 @@ frames = [
     for frame in g_animation]
 vm.system.display.show(
     frames,
-    clear=False,
+    clear=False, # whether to clear or leave the last frame in the end
     delay=125, # milliseconds, 8 frames per second, also for fade effects
-    loop=True,
+    loop=True, # whether to loop the animation
     fade=2) # 1 is "Direct", 2 is "Overlay", 3 is "Slide right",
             # 4 is "Slide left", 5 is "Fade in", 6 is "Fade out"

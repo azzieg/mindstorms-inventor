@@ -7,4 +7,4 @@ vm.system.display.show(
         convert_image(
             "9909999099000009000909990", # 0 is off, 9 is full brightness
             vm.store.display_brightness())),
-    clear=False)
+    clear=False) # whether to clear or leave the image in the end
