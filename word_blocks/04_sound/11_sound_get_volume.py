@@ -1,3 +1,4 @@
 from util.scratch import to_number
 
-volume = to_number(vm.store.sound_volume())
+def get_volume():
+    return to_number(vm.store.sound_volume())
