@@ -5,4 +5,4 @@ async def stack_function(vm, stack):
 vm.register_on_gesture(
     "registration_id",
     stack_function,
-    2) # 0 is "tapped", 2 is "shaken", 3 is "falling"
+    2) # 0 for "tapped", 2 for "shaken", 3 for "falling"

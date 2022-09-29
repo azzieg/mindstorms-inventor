@@ -5,7 +5,7 @@ from util.sensors import is_type
 
 # Ultrasonic light up
 port = getattr(hub.port, "A", None)
-if getattr(port, "device", None) and is_type("A", 62): # if ultrasonic sensor
+if getattr(port, "device", None) and is_type("A", 62): # for ultrasonic sensor
     # This could be simplified by operating on lists rather than strings.
     data = "".join([
         chr(percent_to_int(math.floor(clamp(to_number(p), 0, 100) + 0.5), 87))

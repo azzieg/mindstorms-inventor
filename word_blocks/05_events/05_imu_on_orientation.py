@@ -5,5 +5,5 @@ async def stack_function(vm, stack):
 vm.register_on_orientation(
     "registration_id",
     stack_function,
-    3) # which side facing up triggers the event: 0 is "front", 1 is "top",
-       # 2 is "right side", 3 is "back", 4 is "bottom", 5 is "left side"
+    3) # which side facing up triggers the event: 0 for "front", 1 for "top",
+       # 2 for "right side", 3 for "back", 4 for "bottom", 5 for "left side"
