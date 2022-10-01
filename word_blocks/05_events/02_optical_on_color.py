@@ -7,7 +7,11 @@ async def stack_function(vm, stack):
     pass # replace this with your event handling program
 
 def stack_condition(vm, stack):
-    sensor_value = get_sensor_value("A", 0, -1, (61,))
+    sensor_value = get_sensor_value(
+        "A",
+        0, # color recognition mode
+        -1, # default value if unknown
+        (61,)) # use for Technic color sensor
     if sensor_value is None:
         sensor_value = -1
     # -1 is no color detected, 0 is black, 1 is pink, 3 is blue,
