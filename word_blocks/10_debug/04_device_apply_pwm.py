@@ -4,6 +4,6 @@ import hub
 try:
     port = getattr(hub.port, "A", None)
     if port is not None:
-        port.pwm(10) # percent, pulse-width modulation (PWM)
+        port.pwm(30) # percent, pulse-width modulation (PWM)
 except ValueError:
     pass
