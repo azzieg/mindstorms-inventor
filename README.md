@@ -279,20 +279,20 @@ def setup(rpc, system, stop):
 vm = setup(None, system.system, sys.exit)
 if "program_selector" not in json_rpc.methods:
     json_rpc.add_method("program_selector", json_rpc.methods["program_terminate"])
-def terminate(p, i):
+def terminate(params, id):
     vm.shutdown()
-    json_rpc.methods["program_selector"](p, i)
+    json_rpc.methods["program_selector"](params, id)
 json_rpc.add_method("program_terminate", terminate)
 vm.start()
 ```
 
-With the simplified setup used above, the `main` function would just keep
-beeping until the hub gets restarted. But if we register the `terminate` method
-to handle the `program_terminate` RPC, we can `shutdown` our VM when the stop
-signal from the app arrives. To complete the operation cleanly, we should
-invoke the original handler after we shut down our VM. Here, we first copy the
-handler under a different name (`program_selector`), if necessary, so that we
-can call it at the end of our `terminate` function.
+With the simplified one-liner setup used before, the `main` function would just
+keep beeping until the hub gets restarted. But if we register a custom
+`terminate` method to handle the `program_terminate` RPC, we can `shutdown` our
+VM when the stop signal from the app arrives. To complete the operation cleanly,
+we should invoke the original handler after we shut down our VM. Here, we first
+copy the handler under a different name (`program_selector`), if necessary, so
+that we can call it at the end of our `terminate` function.
 
 This setup could be further improved to properly unregister the handler when it
 is no longer necessary, or at least release the VM handle, but this does not
