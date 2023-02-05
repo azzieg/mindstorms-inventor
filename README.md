@@ -59,6 +59,12 @@ will primarily focus on running code on the hub, using remote control only when
 it is truly needed (for example, using [Hub to Hub
 communication](https://github.com/NStrijbosch/RevEng-hub2hub-word-blocks)).
 
+### Expected setup
+
+The following assumes that you're using the original Mindstorms Robot Inventor
+hub firmware. Example code presented below should work when using the Mindstorms
+Robot Inventor mobile or desktop app in Python mode.
+
 ## Getting started
 
 ### Background
